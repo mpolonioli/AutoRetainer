@@ -1,4 +1,5 @@
-﻿using AutoRetainerAPI.Configuration;
+﻿using AutoRetainer.Modules.Undercut;
+using AutoRetainerAPI.Configuration;
 using ECommons.Configuration;
 using ECommons.ExcelServices;
 using ECommons.Interop;
@@ -45,6 +46,15 @@ internal unsafe class Config
     public bool CappedLevelsLast = false;
     public bool TimerAllowNegative = false;
     public bool MarketCooldownOverlay = false;
+
+    public bool EnableUndercut = false;
+    public UndercutPriceSource UndercutPriceSource = UndercutPriceSource.In_Game;
+    public UndercutUniversalisScope UndercutUniversalisScope = UndercutUniversalisScope.Data_Center;
+    public int UndercutBy = 1;
+    public bool UndercutCompareHQOnly = true;
+    public int UndercutMaxDropPercent = 0;
+    public int UndercutDelayMs = 2500;
+    public HashSet<string> UndercutExcludedRetainers = [];
 
     public bool LoginOverlay = false;
     public float LoginOverlayScale = 1f;

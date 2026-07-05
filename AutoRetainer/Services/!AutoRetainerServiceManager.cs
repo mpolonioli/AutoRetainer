@@ -1,4 +1,5 @@
 ﻿using AutoRetainer.Modules.EzIPCManagers;
+using AutoRetainer.Modules.Undercut;
 
 using AutoRetainer.UI.NeoUI;
 using AutoRetainer.UI.Overlays;
@@ -26,4 +27,5 @@ public static class AutoRetainerServiceManager
     public static CabinetManager CabinetManager;
     public static AnomalyWindow AnomalyWindow;
     public static MirageManager MirageManager;
+    public static UndercutMarketListener UndercutMarketListener;
 }

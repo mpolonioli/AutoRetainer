@@ -1,4 +1,5 @@
 using AutoRetainer.Internal;
+using AutoRetainer.Modules.Undercut;
 using AutoRetainer.Scheduler.Handlers;
 using AutoRetainer.Scheduler.Tasks;
 using AutoRetainerAPI;
@@ -261,6 +262,29 @@ internal unsafe class RetainerListOverlay : Window
                     ImGui.EndPopup();
                 }
             }
+
+            ImGui.SameLine();
+            if(ImGuiEx.IconButton($"{Lang.IconUndercut}##undercutall"))
+            {
+                for(var i = 0; i < GameRetainerManager.Count; i++)
+                {
+                    var ret = GameRetainerManager.Retainers[i];
+                    if(ret.Available && ret.MarkerItemCount > 0
+                        && !C.UndercutExcludedRetainers.Contains(Utils.GetAdditionalDataKey(Data.CID, ret.Name, false)))
+                    {
+                        P.TaskManager.Enqueue(() => RetainerListHandlers.SelectRetainerByName(ret.Name));
+                        TaskUndercutItems.Enqueue();
+
+                        if(C.RetainerMenuDelay > 0)
+                        {
+                            TaskWaitSelectString.Enqueue(C.RetainerMenuDelay);
+                        }
+                        P.TaskManager.Enqueue(RetainerHandlers.SelectQuit);
+                        P.TaskManager.Enqueue(RetainerHandlers.ConfirmCantBuyback);
+                    }
+                }
+            }
+            ImGuiEx.Tooltip("Quick Undercut - adjust market board prices on all retainers");
 
             PluginToProcess = null;
             Svc.PluginInterface.GetIpcProvider<object>(ApiConsts.OnRetainerListTaskButtonsDraw).SendMessage();
