@@ -92,6 +92,20 @@ public static unsafe class RetainerConfig
         }
 
         ImGui.Separator();
+        var undercutKey = Utils.GetAdditionalDataKey(data.CID, ret.Name, false);
+        var undercutEnabled = !C.UndercutExcludedRetainers.Contains(undercutKey);
+        if(ImGui.Checkbox($"Undercut Market Prices", ref undercutEnabled))
+        {
+            if(undercutEnabled)
+            {
+                C.UndercutExcludedRetainers.Remove(undercutKey);
+            }
+            else
+            {
+                C.UndercutExcludedRetainers.Add(undercutKey);
+            }
+        }
+        if(!C.EnableUndercut) ImGuiEx.HelpMarker("Globally disabled in settings", EColor.RedBright, FontAwesomeIcon.ExclamationTriangle.ToIconString());
         ImGui.Checkbox($"Withdraw/Deposit Gil", ref adata.WithdrawGil);
         if(adata.WithdrawGil)
         {

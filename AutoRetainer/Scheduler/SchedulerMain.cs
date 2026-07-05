@@ -1,4 +1,5 @@
 ﻿using AutoRetainer.Internal;
+using AutoRetainer.Modules.Undercut;
 using AutoRetainer.Scheduler.Handlers;
 using AutoRetainer.Scheduler.Tasks;
 using AutoRetainerAPI.Configuration;
@@ -182,6 +183,12 @@ internal static unsafe class SchedulerMain
                                         {
                                             TaskWithdrawGil.Enqueue(adata.WithdrawGilPercent);
                                         }
+                                    }
+
+                                    if(C.EnableUndercut && ret.MarkerItemCount > 0
+                                        && !C.UndercutExcludedRetainers.Contains(Utils.GetAdditionalDataKey(Svc.ClientState.LocalContentId, ret.Name.ToString(), false)))
+                                    {
+                                        TaskUndercutItems.Enqueue();
                                     }
 
                                     if(Data.GetIMSettings().IMEnableAutoVendor)
