@@ -27,6 +27,8 @@ public sealed class NeoWindow : Window
 
         ..ConfigFileSystemHelpers.CreateInstancesOf<InventoryManagementBase>(),
 
+        new UndercutTab(),
+
         new LoginOverlay(),
         new MiscTab(),
 
