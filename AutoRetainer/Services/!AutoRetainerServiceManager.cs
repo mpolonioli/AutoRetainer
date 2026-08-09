@@ -27,4 +27,5 @@ public static class AutoRetainerServiceManager
     public static CabinetManager CabinetManager;
     public static AnomalyWindow AnomalyWindow;
     public static MirageManager MirageManager;
+    public static UndercutMarketListener UndercutMarketListener;
 }
