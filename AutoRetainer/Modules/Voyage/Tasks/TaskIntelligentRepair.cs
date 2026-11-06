@@ -1,4 +1,5 @@
 ﻿using AutoRetainer.Internal;
+using AutoRetainer.Modules.Voyage.RepairCrafting;
 
 namespace AutoRetainer.Modules.Voyage.Tasks;
 
@@ -12,6 +13,7 @@ internal static class TaskIntelligentRepair
             var rep = VoyageUtils.GetIsVesselNeedsRepair(name, type, out var log);
             if(rep.Count > 0)
             {
+                if(RepairMaterialCrafter.TryHandleShortage(name, type, rep)) return;
                 TaskRepairAll.EnqueueImmediate(rep, name, type);
             }
             DebugLog($"Repair check log: {log.Join(", ")}");

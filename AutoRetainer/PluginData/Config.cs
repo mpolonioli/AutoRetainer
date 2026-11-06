@@ -203,6 +203,9 @@ internal unsafe class Config
     public bool ManipulatePriority = false;
 
     public bool SubsAutoResend2 = true;
+    public bool CraftRepairMaterials = false;
+    public int CraftRepairMaterialsExtra = 0;
+    public int CraftRepairMaterialsTimeoutMinutes = 15;
     //public bool SubsAutoRepair = true;
     //public bool SubsOnlyFinalize = false;
     //public bool SubsAutoEnable = false;

@@ -33,6 +33,11 @@ public class DeployablesTab : NeoUIEntry
         .Checkbox($"Finalize all vessels before resending them", () => ref C.FinalizeBeforeResend)
         .Checkbox($"Hide Airships from Deployables UI", () => ref C.HideAirships)
 
+        .Section("Repair materials")
+        .Checkbox($"Craft Magitek Repair Materials with Artisan when out of them", () => ref C.CraftRepairMaterials, "When a submarine can't be repaired, AutoRetainer leaves the panel, creates an Artisan crafting list for the missing materials, crafts it and resumes. Artisan must be installed and the crafting ingredients must already be in your inventory.")
+        .InputInt(100f, $"Extra repair materials to craft", () => ref C.CraftRepairMaterialsExtra.ValidateRange(0, 999))
+        .InputInt(100f, $"Crafting timeout, minutes", () => ref C.CraftRepairMaterialsTimeoutMinutes.ValidateRange(1, 120))
+
         .Section("Plans")
         .Widget(SubmarineUnlockPlanUI.DrawButtonText, x =>
         {
