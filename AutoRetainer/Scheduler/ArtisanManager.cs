@@ -1,4 +1,5 @@
-﻿using AutoRetainerAPI.Configuration;
+﻿using AutoRetainer.Modules.Voyage.RepairCrafting;
+using AutoRetainerAPI.Configuration;
 using Dalamud.Plugin.Ipc.Exceptions;
 using ECommons.Throttlers;
 
@@ -11,6 +12,7 @@ internal static class ArtisanManager
 
     internal static void ArtisanTick()
     {
+        if(RepairMaterialCrafter.Active) return;
         if(C.ArtisanIntegration)
         {
             if(IsCurrentlyOperating() && MultiMode.EnsureCharacterValidity(true))
